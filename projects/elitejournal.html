@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EliteJournal Trading Data | Rex Wong</title>
+<meta name="description" content="Capturing broker fill data before it expires, reconciling it against the account ledger, and keeping fee rates point in time so historical P&amp;L never silently changes.">
+<link rel="canonical" href="https://rexwong428.github.io/portfolio/projects/elitejournal.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="EliteJournal Trading Data">
+<meta property="og:description" content="Broker fills expire within days. This is the pipeline that captures, reconciles and keeps them correct.">
+<meta property="og:url" content="https://rexwong428.github.io/portfolio/projects/elitejournal.html">
+<meta property="og:image" content="https://rexwong428.github.io/portfolio/assets/img/elitejournal.svg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232D2B38'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial' font-size='15' font-weight='bold' fill='%2377D4CE' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch to light theme">
+  <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 13.2A9 9 0 1 1 10.8 3a7 7 0 0 0 10.2 10.2z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-13V1h0v3zm0 19v-3 3zM4.2 5.6 2.1 3.5l1.4-1.4 2.1 2.1-1.4 1.4zm14.2 14.2-2.1-2.1 1.4-1.4 2.1 2.1-1.4 1.4zM1 13v-2h3v2H1zm19 0v-2h3v2h-3zM3.5 21.9l-1.4-1.4 2.1-2.1 1.4 1.4-2.1 2.1zM17.9 5.6l-1.4-1.4 2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>
+</button>
+
+<div class="wrapper">
+  <main class="card card--wide detail" id="main">
+
+    <a class="back" href="../index.html">← Back</a>
+
+    <p class="detail__tool">SQL | Python | Broker API</p>
+    <h1 class="detail__title">EliteJournal Trading Data</h1>
+
+    <img class="detail__shot" src="../assets/img/elitejournal.svg" alt="Wireframe of a trading journal: three summary tiles, a candlestick chart, and a table of trades with a profit and loss column." width="480" height="270">
+
+    <dl class="meta">
+      <div class="meta__row"><dt>Focus</dt><dd>Data capture, reconciliation, point in time correctness</dd></div>
+      <div class="meta__row"><dt>Tools</dt><dd>SQL, Python, broker REST API, CSV imports</dd></div>
+      <div class="meta__row"><dt>Data</dt><dd>Executions, fees, account balances, imported statements</dd></div>
+      <div class="meta__row"><dt>Constraint</dt><dd>Source data expires and cannot be re-requested</dd></div>
+    </dl>
+
+    <h2>The problem the data creates</h2>
+    <p>A trading journal is only as good as the executions behind it. The broker API does not keep those executions available indefinitely: recent fills can be pulled, older ones drop off and cannot be requested again at any price. That single fact changes the whole shape of the work. Ingestion is not a convenience feature that can be retried tomorrow, it is a deadline. If a sync silently stops on a Friday, by Monday the data is gone permanently.</p>
+
+    <h2>Capturing before the window closes</h2>
+    <p>Each account carries a watermark recording how far its data has actually been read, so a sync resumes from the last confirmed position rather than from an assumption. Accounts whose connection has lapsed are surfaced as a list to act on, instead of quietly returning zero rows and looking healthy. Where an account is connected late, historical backfills pull whatever the broker still holds, and the boundary between backfilled and live data is recorded rather than blurred.</p>
+
+    <h2>Reconciling, not just importing</h2>
+    <p>Fills arrive from the API, but statements and CSV exports also arrive by hand, in a different shape from every broker. Both paths land in one trade model so that analytics cannot disagree with the journal, and the imported set is reconciled against the account's own cash and balance records rather than trusted on arrival. The parsers handle the real formats people actually export, including accounting style negatives written as bracketed amounts, which a naive numeric cast reads as text or as a positive number.</p>
+
+    <h2>Fees are point in time</h2>
+    <p>Commission and fee rates change. If the rate is looked up at report time, editing today's rate silently rewrites last year's P&amp;L, and every historical number moves without anyone touching a trade. So rates are snapshotted onto each trade at the moment it is synced, and reporting reads the snapshot. Re-pricing older trades is possible, but it is a deliberate action with a visible result rather than an accident.</p>
+
+    <h2>Making the import configuration data, not code</h2>
+    <p>Brokers and fee schedules are held in a table, not hardcoded across components. The import options, the connection flow and the admin fee screens all read from that one source, so adding a broker or a new export format is a data change plus a parser, rather than an edit in several places that will fall out of step. It also means the fee schedule can be inspected and corrected by someone who is not reading the code.</p>
+
+    <h2>What I would call the lesson</h2>
+    <p>Most reporting problems in this system were never reporting problems. They were a sync that stopped without saying so, a rate that was read at the wrong time, or two tables that were each partly right. Fixing the number in the dashboard would have hidden all three. The work worth doing was upstream, where the record is either captured correctly or lost.</p>
+
+    <p style="margin-top:1.8rem">
+      <a class="btn btn--ghost btn--auto" href="../index.html">All projects</a>
+    </p>
+
+    <footer class="footer">
+      <p><a href="mailto:rex.wongtakwai@gmail.com">rex.wongtakwai@gmail.com</a></p>
+    </footer>
+
+  </main>
+</div>
+
+<script src="../assets/js/theme.js"></script>
+</body>
+</html>
