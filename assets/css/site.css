@@ -397,6 +397,23 @@ button.btn{ border:0; cursor:pointer; -webkit-appearance:none; appearance:none; 
 .footer a{ color:var(--mint); text-decoration:none; }
 .footer a:hover{ text-decoration:underline; }
 
+/* ---------- skills ---------- */
+.skills__logos{
+  list-style:none; margin:1.75rem 0 0; padding:0;
+  display:flex; flex-wrap:wrap; justify-content:center;
+  align-items:center; gap:1.5rem 2.25rem;
+}
+.skills__logos img{
+  display:block; height:3.5rem; width:auto;
+  /* the marks are full colour brand assets; lift them slightly off the
+     dark card so the darker ones (Excel, Power BI) keep their edges */
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.28));
+}
+@media (max-width:480px){
+  .skills__logos{ gap:1.25rem 1.75rem; }
+  .skills__logos img{ height:2.75rem; }
+}
+
 /* ---------- contact form ---------- */
 .contact{ margin-top:1.5rem; text-align:left; }
 .contact .field{ margin-bottom:1rem; }
