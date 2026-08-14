@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" role="img" aria-labelledby="er-title">
+  <title id="er-title">Two sides of a ledger being reconciled against a centre line</title>
+
+  <rect width="480" height="270" fill="#2D2B38"/>
+
+  <!-- faint field so the panel does not read as flat colour -->
+  <g stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0 45.5h480M0 90.5h480M0 135.5h480M0 180.5h480M0 225.5h480"/>
+  </g>
+
+  <!-- the line both sides have to agree on -->
+  <line x1="240" y1="34" x2="240" y2="236" stroke="#7AE6E6" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="3 5"/>
+
+  <!-- left: source records — right: what they were matched against -->
+  <g>
+    <!-- row 1 : matched -->
+    <rect x="96"  y="62"  width="132" height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    <rect x="252" y="62"  width="132" height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    <!-- row 2 : matched -->
+    <rect x="60"  y="94"  width="168" height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    <rect x="252" y="94"  width="168" height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    <!-- row 3 : the break, called out -->
+    <rect x="120" y="126" width="108" height="11" rx="2" fill="#77D4CE"/>
+    <rect x="252" y="126" width="74"  height="11" rx="2" fill="#77D4CE" fill-opacity="0.42"/>
+    <rect x="330" y="126" width="34"  height="11" rx="2" fill="#FFCCB0"/>
+    <!-- row 4 : matched -->
+    <rect x="84"  y="158" width="144" height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    <rect x="252" y="158" width="144" height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    <!-- row 5 : matched -->
+    <rect x="140" y="190" width="88"  height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+    <rect x="252" y="190" width="88"  height="11" rx="2" fill="#FFFFFF" fill-opacity="0.2"/>
+  </g>
+
+  <!-- balanced -->
+  <g transform="translate(240 34)">
+    <circle r="15" fill="#7AE6E6"/>
+    <path d="M-6 0.5l4 4.5 8-9" fill="none" stroke="#255959" stroke-width="2.4"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

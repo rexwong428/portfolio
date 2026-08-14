@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EliteRewards Platform Data | Rex Wong</title>
+<meta name="description" content="Data operations on a live rewards platform: cleansing, deduplication and reconciliation across member, trading and transaction records, recurring statements and P&amp;L reporting, a zero data loss production migration, and an automated fulfilment lifecycle.">
+<link rel="canonical" href="https://rexwong428.github.io/portfolio/projects/eliterewards.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="EliteRewards Platform Data">
+<meta property="og:description" content="Keeping a live rewards platform's records accurate, and building the reporting the business runs on top of them.">
+<meta property="og:url" content="https://rexwong428.github.io/portfolio/projects/eliterewards.html">
+<meta property="og:image" content="https://rexwong428.github.io/portfolio/assets/img/eliterewards.svg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232D2B38'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial' font-size='15' font-weight='bold' fill='%2377D4CE' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch to light theme">
+  <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 13.2A9 9 0 1 1 10.8 3a7 7 0 0 0 10.2 10.2z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-13V1h0v3zm0 19v-3 3zM4.2 5.6 2.1 3.5l1.4-1.4 2.1 2.1-1.4 1.4zm14.2 14.2-2.1-2.1 1.4-1.4 2.1 2.1-1.4 1.4zM1 13v-2h3v2H1zm19 0v-2h3v2h-3zM3.5 21.9l-1.4-1.4 2.1-2.1 1.4 1.4-2.1 2.1zM17.9 5.6l-1.4-1.4 2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>
+</button>
+
+<div class="wrapper">
+  <main class="card card--wide detail" id="main">
+
+    <a class="back" href="../index.html">← Back</a>
+
+    <p class="detail__tool">SQL | Python | Power BI</p>
+    <h1 class="detail__title">EliteRewards Platform Data</h1>
+
+    <img class="detail__shot" src="../assets/img/eliterewards.svg" alt="Two columns of ledger rows either side of a centre line, with one unmatched row highlighted." width="480" height="270">
+
+    <dl class="meta">
+      <div class="meta__row"><dt>Role</dt><dd>Data Operation Analyst</dd></div>
+      <div class="meta__row"><dt>Period</dt><dd>Jan 2026 to present</dd></div>
+      <div class="meta__row"><dt>Tools</dt><dd>SQL, Python, Power BI</dd></div>
+      <div class="meta__row"><dt>Domain</dt><dd>Live production rewards platform, member and trading data</dd></div>
+    </dl>
+
+    <h2>What it is</h2>
+    <p>A live production rewards platform for traders. Members earn points against trading activity and redeem them against real inventory, which means the points ledger has to balance, the member records have to be right, and the trading data flowing in from a broker API has to reconcile against what the platform believes happened. My work is the data layer underneath all of that, plus the reporting the business reads off it.</p>
+
+    <h2>Keeping the records correct</h2>
+    <p>Day to day, this is data accuracy, completeness and consistency across member accounts, contact records, statuses and transaction data. The core processes are cleansing, deduplication, reconciliation and enrichment, run across member, trading and transaction records rather than against a single table, because a member is only correct if all three agree.</p>
+
+    <h2>Reporting built on top</h2>
+    <p>Recurring reports and dashboards covering monthly statements, P&amp;L, activity metrics and account reconciliation. These are the reports the business actually operates on, so they are built to be re-run rather than rebuilt, and the reconciliation view exists so that a number in a statement can always be traced back to the records behind it.</p>
+
+    <h2>The migration</h2>
+    <p>Delivered a full production data migration end to end: schema migration, record consolidation, cross system reconciliation, and post cutover catch up sweeps. Completed with zero data loss. The catch up sweeps are the part that matters. A migration is not finished when the rows land, it is finished when the two systems agree on every row that moved during the cutover window.</p>
+
+    <h2>Broker integration</h2>
+    <p>Integrated the Tradovate API so trading accounts connect automatically, trade data synchronises and reconciles on an ongoing basis, historical backfills are processed, and accounts that need reconnecting are identified rather than quietly going stale. Broker fill data does not stay available indefinitely, so a sync that silently stops is a data loss problem, not an inconvenience.</p>
+
+    <h2>Automating fulfilment</h2>
+    <p>Automated the reward fulfilment lifecycle from end to end: validating balances and inventory before anything is committed, allocating redemption codes atomically so the same code cannot be issued twice, processing scheduled requests, sending redemption emails, and supporting the administrative workflows behind restocking, held redemptions, approvals and points adjustments. Outbound communications to segmented recipient lists run on managed templates with versioning, BCC handling, delivery tracking and re-send rules.</p>
+
+    <h2>Why this one is here</h2>
+    <p>The other projects on this site are analyses of datasets that were handed to me. This one is a system that other people depend on being right, where the data is generated by real activity, arrives incomplete, and has to be reconciled before any reporting on top of it means anything. It is the closest thing here to the work itself.</p>
+
+    <p style="margin-top:1.8rem">
+      <a class="btn btn--ghost btn--auto" href="../index.html">All projects</a>
+    </p>
+
+    <footer class="footer">
+      <p><a href="mailto:rex.wongtakwai@gmail.com">rex.wongtakwai@gmail.com</a></p>
+    </footer>
+
+  </main>
+</div>
+
+<script src="../assets/js/theme.js"></script>
+</body>
+</html>

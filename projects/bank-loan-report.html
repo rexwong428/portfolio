@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bank Loan Report | Rex Wong</title>
-<meta name="description" content="A Power BI report over a SQL loan book — funded amounts, amounts received, interest rates and loan performance across states, terms and purposes.">
+<meta name="description" content="A Power BI report over a SQL loan book covering funded amounts, amounts received, interest rates and loan performance across states, terms and purposes.">
 <link rel="canonical" href="https://rexwong428.github.io/portfolio/projects/bank-loan-report.html">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bank Loan Report">
-<meta property="og:description" content="A Power BI report over a SQL loan book — funded amounts, interest rates and loan performance across states and categories.">
+<meta property="og:description" content="A Power BI report over a SQL loan book covering funded amounts, interest rates and loan performance across states and categories.">
 <meta property="og:url" content="https://rexwong428.github.io/portfolio/projects/bank-loan-report.html">
 <meta property="og:image" content="https://rexwong428.github.io/portfolio/assets/img/bank-loan.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -45,22 +45,22 @@
     <dl class="meta">
       <div class="meta__row"><dt>Tools</dt><dd>Power BI, SQL</dd></div>
       <div class="meta__row"><dt>Project Type</dt><dd>Data Modelling, Reporting</dd></div>
-      <div class="meta__row"><dt>Subject</dt><dd>Consumer loan book — origination and repayment performance</dd></div>
+      <div class="meta__row"><dt>Subject</dt><dd>Consumer loan book, origination and repayment performance</dd></div>
     </dl>
 
     <h2>Goal</h2>
-    <p>This report gives a lending team one place to see how the loan book is performing. It visualizes key metrics such as total funded amounts, interest rates, and loan performance across various states and categories, so that portfolio health can be read at a glance and then broken down by the dimensions that matter — geography, loan purpose, term, employment length and grade.</p>
+    <p>This report gives a lending team one place to see how the loan book is performing. It visualizes key metrics such as total funded amounts, interest rates, and loan performance across various states and categories, so that portfolio health can be read at a glance and then broken down by the dimensions that matter: geography, loan purpose, term, employment length and grade.</p>
 
     <h2>Report structure</h2>
     <p>The report is built in three layers, following the way the question is normally asked in a lending review:</p>
     <ul>
-      <li><strong>Summary</strong> — headline KPIs: total loan applications, total funded amount, total amount received, average interest rate and average debt-to-income, each split into good and bad loans so that the quality of the book is visible next to its size.</li>
-      <li><strong>Overview</strong> — the same measures over time and across dimensions: monthly trend, a state map, term, employment length, loan purpose and home ownership.</li>
-      <li><strong>Details</strong> — a grid at loan-grain, so any number in the two summary pages can be traced back to the underlying records.</li>
+      <li><strong>Summary.</strong> Headline KPIs: total loan applications, total funded amount, total amount received, average interest rate and average debt-to-income, each split into good and bad loans so that the quality of the book is visible next to its size.</li>
+      <li><strong>Overview.</strong> The same measures over time and across dimensions: monthly trend, a state map, term, employment length, loan purpose and home ownership.</li>
+      <li><strong>Details.</strong> A grid at loan grain, so any number in the two summary pages can be traced back to the underlying records.</li>
     </ul>
 
     <h2>Process</h2>
-    <p>The source loan data was staged in SQL, where the metric definitions were written and validated first — the totals, the month-on-month comparisons, and the good/bad classification. Working the definitions out in SQL before touching the report means the numbers have a single, checkable source rather than being assembled inside visuals.</p>
+    <p>The source loan data was staged in SQL, where the metric definitions were written and validated first: the totals, the month on month comparisons, and the good/bad classification. Working the definitions out in SQL before touching the report means the numbers have a single, checkable source rather than being assembled inside visuals.</p>
     <p>The validated model was then loaded into Power BI, where the measures were rebuilt in DAX and the three pages assembled with cross-filtering so a selection on the map or on loan purpose carries through the whole report.</p>
 
     <h2>Key Questions Answered</h2>

@@ -11,14 +11,27 @@ third-party requests — fonts and images are served from this repo.
 
 ```
 index.html                        hero · about · skills · featured projects
+projects/eliterewards.html        SQL + Python + Power BI (current role)
 projects/electric-vehicles.html   Tableau
 projects/bank-loan-report.html    Power BI + SQL
 projects/coffee-sales.html        Excel
+assets/Resume_RexWong.pdf         what the View Resume button opens
 assets/css/site.css               all styles, both themes
 assets/js/theme.js                theme toggle only
 assets/fonts/                     Montserrat (variable) + Source Sans Pro, self-hosted
 assets/img/                       background, headshot, project images
 ```
+
+## House style
+
+Two rules the copy follows, worth keeping when you edit:
+
+- **No em or en dashes.** Use a colon, a full stop, or rewrite the sentence.
+  Date ranges take a plain hyphen (`2011-2023`). Hyphens inside compound
+  words are fine.
+- **Sizes are rem off a root that scales in points** (18pt / 13pt / 11pt at
+  1680px and 980px), copied from the original Carrd build. Don't introduce
+  pixel sizes; they will not scale with the rest of the page.
 
 ## Editing
 
