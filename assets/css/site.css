@@ -449,6 +449,11 @@ button.btn{ border:0; cursor:pointer; -webkit-appearance:none; appearance:none; 
 /* ---------- contact form ---------- */
 .contact{ margin-top:1.5rem; text-align:left; }
 .contact .field{ margin-bottom:1rem; }
+/* honeypot: off screen for people, still fillable by bots */
+.contact .hp{
+  position:absolute; left:-9999px; width:1px; height:1px;
+  opacity:0; pointer-events:none;
+}
 .contact label{
   display:block; font-family:var(--display); font-weight:600;
   font-size:.6875rem; letter-spacing:.14rem; text-transform:uppercase;

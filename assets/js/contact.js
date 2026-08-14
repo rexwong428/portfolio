@@ -1,17 +1,24 @@
 /* Contact form.
-   GitHub Pages serves static files only, so there is no server to post to.
-   Rather than depend on a third party form service, this composes a mailto:
-   and hands it to the visitor's own mail app with everything filled in.
-   The address stays visible in the footer as a fallback. */
+   GitHub Pages serves static files only, so a form needs somewhere off site to
+   post to. This posts to FormSubmit, which relays the message to Rex's inbox
+   and needs no account: the first submission triggers an activation email that
+   he clicks once, after which messages arrive directly.
+
+   Submission is AJAX so the visitor stays on the page. If the relay is
+   unreachable, the handler falls back to composing a mailto so the message is
+   never simply lost. */
 (function () {
   "use strict";
 
   var TO = "rex.wongtakwai@gmail.com";
+  var ENDPOINT = "https://formsubmit.co/ajax/" + TO;
 
   var form = document.getElementById("contactForm");
   if (!form) return;
 
   var note = document.getElementById("cf-note");
+  var button = form.querySelector("button[type=submit]");
+  var idle = note ? note.textContent : "";
   var fields = {
     name: document.getElementById("cf-name"),
     email: document.getElementById("cf-email"),
@@ -22,6 +29,14 @@
     var wrap = input.closest(".field");
     if (wrap) wrap.classList.toggle("field--invalid", invalid);
     input.setAttribute("aria-invalid", invalid ? "true" : "false");
+  }
+
+  function say(html) { note.innerHTML = html; }
+
+  function mailtoFallback(name, email, message) {
+    return "mailto:" + TO +
+      "?subject=" + encodeURIComponent("Portfolio enquiry from " + name) +
+      "&body=" + encodeURIComponent(message + "\n\n--\n" + name + "\n" + email);
   }
 
   function firstProblem() {
@@ -45,20 +60,48 @@
     var problem = firstProblem();
     if (problem) {
       mark(problem[0], true);
-      note.textContent = problem[1];
+      say(problem[1]);
       problem[0].focus();
       return;
     }
 
+    // bots fill every field they can see; this one is hidden from people
+    if (form.querySelector("[name=_honey]").value) return;
+
     var name = fields.name.value.trim();
-    var subject = "Portfolio enquiry from " + name;
-    var body = fields.message.value.trim() + "\n\n--\n" + name + "\n" + fields.email.value.trim();
+    var email = fields.email.value.trim();
+    var message = fields.message.value.trim();
 
-    note.innerHTML = "Opening your email app. If nothing happens, write to " +
-      '<a href="mailto:' + TO + '">' + TO + "</a>.";
+    button.disabled = true;
+    say("Sending…");
 
-    window.location.href = "mailto:" + TO +
-      "?subject=" + encodeURIComponent(subject) +
-      "&body=" + encodeURIComponent(body);
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message,
+        _subject: "Portfolio enquiry from " + name,
+        _template: "table",
+        _captcha: "false"
+      })
+    })
+      .then(function (res) { return res.json().catch(function () { return {}; }); })
+      .then(function (data) {
+        if (String(data.success) !== "true") throw new Error(data.message || "relay refused");
+        form.reset();
+        say("Thanks, your message is on its way. I will reply to " + email + ".");
+      })
+      .catch(function () {
+        say('That did not go through. Please write to <a href="' +
+            mailtoFallback(name, email, message) + '">' + TO + "</a> instead.");
+      })
+      .then(function () {
+        button.disabled = false;
+        setTimeout(function () {
+          if (note.textContent.indexOf("on its way") !== -1) say(idle);
+        }, 12000);
+      });
   });
 })();
