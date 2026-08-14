@@ -321,6 +321,12 @@ button.btn{ border:0; cursor:pointer; -webkit-appearance:none; appearance:none; 
    tool/title block matches the original's project heading (Montserrat
    1.25rem/1.375, tracked 0.375rem). */
 .card--wide{ text-align:left; }
+@media (min-width:58rem){
+  .card--wide{ max-width:54rem; }
+  /* the card gets wider for the screenshots; running text must not follow it out
+     past a comfortable measure */
+  .detail > p, .detail > ul:not(.shots), .detail > ol, .detail .meta, .shots__cap{ max-width:34rem; }
+}
 .back{
   display:inline-block;
   font-family:var(--display); font-weight:400;
@@ -396,6 +402,32 @@ button.btn{ border:0; cursor:pointer; -webkit-appearance:none; appearance:none; 
 }
 .footer a{ color:var(--mint); text-decoration:none; }
 .footer a:hover{ text-decoration:underline; }
+
+/* ---------- multi view screenshots ---------- */
+.shots{ list-style:none; margin:1.5rem 0 0; padding:0; display:grid; gap:2rem; }
+.shots a{ display:block; cursor:zoom-in; }
+.shots img{
+  display:block; width:100%; height:auto; border-radius:.5rem;
+  border:1px solid var(--rule); transition:border-color .18s ease;
+}
+.shots a:hover img,
+.shots a:focus-visible img{ border-color:var(--mint); }
+.shots__cap i{
+  font-style:normal; color:var(--mint); white-space:nowrap;
+}
+.shots__cap{
+  margin:.75rem 0 0; font-size:.875rem; font-weight:300; line-height:1.6;
+  color:var(--ink-faint);
+}
+.shots__cap b{
+  display:block; font-family:var(--display); font-weight:600;
+  font-size:.6875rem; letter-spacing:.14rem; text-transform:uppercase;
+  color:var(--mint); margin-bottom:.25rem;
+}
+.detail__note{
+  margin-top:.875rem; font-size:.8125rem; font-weight:300;
+  color:var(--ink-faint); line-height:1.6;
+}
 
 /* ---------- skills ---------- */
 .skills__logos{
