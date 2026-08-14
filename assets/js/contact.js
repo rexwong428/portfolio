@@ -89,7 +89,12 @@
     })
       .then(function (res) { return res.json().catch(function () { return {}; }); })
       .then(function (data) {
-        if (String(data.success) !== "true") throw new Error(data.message || "relay refused");
+        if (String(data.success) !== "true") {
+          // the relay explains itself (unactivated form, quota, blocked); keep the
+          // visitor's message generic but do not swallow the actual reason
+          if (data.message) console.warn("Contact relay refused:", data.message);
+          throw new Error(data.message || "relay refused");
+        }
         form.reset();
         say("Thanks, your message is on its way. I will reply to " + email + ".");
       })
