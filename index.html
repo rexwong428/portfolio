@@ -81,19 +81,19 @@
 
       <ul class="projects">
         <li class="project">
-          <img class="project__thumb" src="assets/img/eliterewards.svg" alt="" width="480" height="270" loading="lazy">
-          <p class="project__tool">SQL | Python | Power BI</p>
-          <h3 class="project__title"><a href="projects/eliterewards.html">EliteRewards Platform Data</a></h3>
-          <p class="project__desc">Day to day data operations on a live rewards platform: cleansing, deduplication and reconciliation across member, trading and transaction records, the monthly statements and P&amp;L reporting built on top of them, and a full production migration completed with zero data loss.</p>
-          <a class="btn" href="projects/eliterewards.html">More</a>
-        </li>
-
-        <li class="project">
           <img class="project__thumb" src="assets/img/elitejournal.svg" alt="" width="480" height="270" loading="lazy">
           <p class="project__tool">SQL | Python | Broker API</p>
           <h3 class="project__title"><a href="projects/elitejournal.html">EliteJournal Trading Data</a></h3>
           <p class="project__desc">Broker executions drop off the API within days and cannot be requested again, so capture is a deadline rather than a retry. Watermarked syncs, lapsed connections surfaced instead of silently returning nothing, imports reconciled against the account ledger, and fee rates snapshotted so historical P&amp;L never moves on its own.</p>
           <a class="btn" href="projects/elitejournal.html">More</a>
+        </li>
+
+        <li class="project">
+          <img class="project__thumb" src="assets/img/eliterewards.svg" alt="" width="480" height="270" loading="lazy">
+          <p class="project__tool">SQL | Python | Power BI</p>
+          <h3 class="project__title"><a href="projects/eliterewards.html">EliteRewards Platform Data</a></h3>
+          <p class="project__desc">Day to day data operations on a live rewards platform: cleansing, deduplication and reconciliation across member, trading and transaction records, the monthly statements and P&amp;L reporting built on top of them, and a full production migration completed with zero data loss.</p>
+          <a class="btn" href="projects/eliterewards.html">More</a>
         </li>
 
         <li class="project">
@@ -122,6 +122,30 @@
       </ul>
     </section>
 
+    <hr class="divider">
+
+    <section id="contact">
+      <h2 class="section-title section-title--accent">Contact Me</h2>
+      <p class="prose">Have a role, a project, or a question about anything here? Send me a note.</p>
+
+      <form class="contact" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="cf-email">Your email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="5" required></textarea>
+        </div>
+        <button class="btn btn--auto" type="submit">Send Email</button>
+        <p class="contact__note" id="cf-note" role="status">This opens your email app with the message ready to send.</p>
+      </form>
+    </section>
+
     <footer class="footer">
       <p><a href="mailto:rex.wongtakwai@gmail.com">rex.wongtakwai@gmail.com</a></p>
     </footer>
@@ -130,5 +154,6 @@
 </div>
 
 <script src="assets/js/theme.js"></script>
+<script src="assets/js/contact.js"></script>
 </body>
 </html>
