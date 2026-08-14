@@ -1,82 +1,219 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" role="img" aria-labelledby="ej-title">
-  <title id="ej-title">Wireframe of a trading journal: three summary tiles, a candlestick chart, and a table of trades with a profit and loss column</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="ej-title">
+  <title id="ej-title">Illustration of the EliteJournal trading dashboard. All figures shown are made up sample values, not real trading results.</title>
 
-  <rect width="480" height="270" fill="#2D2B38"/>
-  <rect x="16" y="16" width="448" height="238" rx="8" fill="none" stroke="#FFFFFF" stroke-opacity="0.14"/>
+  <defs>
+    <linearGradient id="ejFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E0A828" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#E0A828" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      .s  { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; }
+      .lbl{ font-size:8px;   fill:#6B7280; }
+      .cap{ font-size:9.5px; fill:#374151; font-weight:600; }
+      .val{ font-size:16px;  fill:#111827; font-weight:700; }
+      .up { fill:#15803D; } .dn { fill:#DC2626; } .go { fill:#B47B12; }
+      .tick{ font-size:7px; fill:#9CA3AF; }
+    </style>
+  </defs>
 
-  <!-- title bar -->
-  <rect x="32" y="32" width="104" height="9" rx="4" fill="#FFFFFF" fill-opacity="0.30"/>
-  <rect x="392" y="32" width="56"  height="9" rx="4" fill="#FFFFFF" fill-opacity="0.14"/>
+  <rect width="960" height="540" fill="#F7F7F5"/>
 
-  <!-- three summary tiles -->
-  <g>
-    <rect x="32"  y="54" width="132" height="38" rx="4" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.10"/>
-    <rect x="42"  y="62" width="40"  height="6" rx="3" fill="#FFFFFF" fill-opacity="0.20"/>
-    <rect x="42"  y="74" width="62"  height="10" rx="3" fill="#77D4CE"/>
+  <!-- ============ sidebar ============ -->
+  <rect x="0" y="0" width="150" height="540" fill="#FFFFFF"/>
+  <line x1="150" y1="0" x2="150" y2="540" stroke="#E7E5E0"/>
+  <g class="s">
+    <text x="18" y="30" font-size="12" font-weight="700" fill="#111827">EliteJournal</text>
+    <rect x="96" y="20" width="30" height="12" rx="6" fill="#FBEFD4"/>
+    <text x="111" y="29" font-size="6.5" font-weight="700" fill="#B47B12" text-anchor="middle">BETA</text>
 
-    <rect x="174" y="54" width="132" height="38" rx="4" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.10"/>
-    <rect x="184" y="62" width="34"  height="6" rx="3" fill="#FFFFFF" fill-opacity="0.20"/>
-    <rect x="184" y="74" width="52"  height="10" rx="3" fill="#FFFFFF" fill-opacity="0.32"/>
-
-    <rect x="316" y="54" width="132" height="38" rx="4" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.10"/>
-    <rect x="326" y="62" width="46"  height="6" rx="3" fill="#FFFFFF" fill-opacity="0.20"/>
-    <rect x="326" y="74" width="44"  height="10" rx="3" fill="#FFCCB0"/>
+    <rect x="10" y="52" width="130" height="24" rx="6" fill="#FBEFD4"/>
+    <text x="30" y="67" font-size="9" font-weight="600" fill="#8A5D07">Dashboard</text>
+    <text x="30" y="95"  class="lbl">Daily Journal</text>
+    <text x="30" y="119" class="lbl">Trades</text>
+    <text x="30" y="143" class="lbl">Strategies</text>
+    <text x="30" y="167" class="lbl">Payouts</text>
+    <text x="30" y="191" class="lbl">Imports</text>
+    <text x="30" y="215" class="lbl">Guide</text>
+    <text x="30" y="239" class="lbl">Settings</text>
+    <g fill="#C9C6BF">
+      <rect x="17" y="60"  width="7" height="7" rx="1.5"/><rect x="17" y="88"  width="7" height="7" rx="1.5"/>
+      <rect x="17" y="112" width="7" height="7" rx="1.5"/><rect x="17" y="136" width="7" height="7" rx="1.5"/>
+      <rect x="17" y="160" width="7" height="7" rx="1.5"/><rect x="17" y="184" width="7" height="7" rx="1.5"/>
+      <rect x="17" y="208" width="7" height="7" rx="1.5"/><rect x="17" y="232" width="7" height="7" rx="1.5"/>
+    </g>
   </g>
 
-  <!-- candlestick chart -->
-  <g>
-    <rect x="32" y="104" width="416" height="72" rx="4" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.10"/>
-    <g stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="1">
-      <path d="M32 122.5h416M32 140.5h416M32 158.5h416"/>
-    </g>
-    <g stroke-width="2">
-      <g stroke="#FFFFFF" stroke-opacity="0.30">
-        <path d="M56 128v26M80 134v22M104 122v30M152 130v26M176 126v28M224 132v22M272 118v32M296 126v26M344 130v24M392 124v28M416 132v22"/>
-      </g>
-      <g stroke="#77D4CE"><path d="M128 116v34M248 112v36M368 114v34"/></g>
-      <g stroke="#FFCCB0"><path d="M200 136v24M320 138v22"/></g>
+  <!-- ============ top bar ============ -->
+  <g class="s">
+    <text x="170" y="30" font-size="15" font-weight="700" fill="#111827">Trading Dashboard</text>
+    <rect x="322" y="16" width="84" height="20" rx="5" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="332" y="30" class="lbl">ttfm</text>
+    <rect x="414" y="16" width="84" height="20" rx="5" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="424" y="30" class="lbl">All accounts</text>
+
+    <rect x="768" y="14" width="60" height="22" rx="6" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="798" y="29" class="lbl" text-anchor="middle">Share</text>
+    <rect x="836" y="14" width="88" height="22" rx="6" fill="#E0A828"/>
+    <text x="880" y="29" font-size="9" font-weight="700" fill="#3B2A05" text-anchor="middle">Add Trade</text>
+  </g>
+
+  <!-- filter chips -->
+  <g class="s">
+    <rect x="170" y="52" width="26" height="18" rx="9" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="183" y="64.5" class="tick" text-anchor="middle">7D</text>
+    <rect x="202" y="52" width="30" height="18" rx="9" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="217" y="64.5" class="tick" text-anchor="middle">30D</text>
+    <rect x="238" y="52" width="30" height="18" rx="9" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="253" y="64.5" class="tick" text-anchor="middle">90D</text>
+    <rect x="274" y="52" width="30" height="18" rx="9" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="289" y="64.5" class="tick" text-anchor="middle">YTD</text>
+    <rect x="310" y="52" width="28" height="18" rx="9" fill="#FBEFD4"/>
+    <text x="324" y="64.5" font-size="7" font-weight="700" fill="#8A5D07" text-anchor="middle">All</text>
+  </g>
+
+  <!-- ============ KPI row (invented figures) ============ -->
+  <g class="s">
+    <g>
+      <rect x="170" y="84" width="146" height="62" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+      <text x="184" y="103" class="lbl">Total P&amp;L</text>
+      <text x="184" y="126" class="val up">$8,420.75</text>
     </g>
     <g>
-      <rect x="52"  y="133" width="8" height="14" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="76"  y="139" width="8" height="12" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="100" y="128" width="8" height="17" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="124" y="122" width="8" height="21" rx="1" fill="#77D4CE"/>
-      <rect x="148" y="135" width="8" height="15" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="172" y="131" width="8" height="17" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="196" y="141" width="8" height="14" rx="1" fill="#FFCCB0"/>
-      <rect x="220" y="137" width="8" height="12" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="244" y="118" width="8" height="23" rx="1" fill="#77D4CE"/>
-      <rect x="268" y="124" width="8" height="19" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="292" y="131" width="8" height="16" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="316" y="143" width="8" height="12" rx="1" fill="#FFCCB0"/>
-      <rect x="340" y="135" width="8" height="14" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="364" y="120" width="8" height="22" rx="1" fill="#77D4CE"/>
-      <rect x="388" y="129" width="8" height="18" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
-      <rect x="412" y="137" width="8" height="12" rx="1" fill="#FFFFFF" fill-opacity="0.26"/>
+      <rect x="326" y="84" width="146" height="62" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+      <text x="340" y="103" class="lbl">Win Rate</text>
+      <text x="340" y="126" class="val go">41.2%</text>
+      <text x="340" y="139" class="tick">48W / 59L / 12BE</text>
+    </g>
+    <g>
+      <rect x="482" y="84" width="146" height="62" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+      <text x="496" y="103" class="lbl">Profit Factor</text>
+      <text x="496" y="126" class="val up">1.58</text>
+    </g>
+    <g>
+      <rect x="638" y="84" width="146" height="62" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+      <text x="652" y="103" class="lbl">Expectancy</text>
+      <text x="652" y="126" class="val up">$70.76</text>
+    </g>
+    <g>
+      <rect x="794" y="84" width="146" height="62" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+      <text x="808" y="103" class="lbl">Total Trades</text>
+      <text x="808" y="126" class="val">119</text>
     </g>
   </g>
 
-  <!-- trade table: date, symbol, side, qty, price, P&L -->
-  <g>
-    <g fill="#FFFFFF" fill-opacity="0.22">
-      <rect x="32"  y="190" width="40" height="6" rx="3"/>
-      <rect x="92"  y="190" width="34" height="6" rx="3"/>
-      <rect x="146" y="190" width="24" height="6" rx="3"/>
-      <rect x="190" y="190" width="20" height="6" rx="3"/>
-      <rect x="230" y="190" width="30" height="6" rx="3"/>
-      <rect x="410" y="190" width="38" height="6" rx="3"/>
-    </g>
-    <line x1="32" y1="202.5" x2="448" y2="202.5" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <!-- ============ P&L over time ============ -->
+  <g class="s">
+    <rect x="170" y="158" width="470" height="176" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="184" y="176" class="cap">P&amp;L Over Time</text>
+    <rect x="524" y="165" width="102" height="16" rx="8" fill="#F3F1EC"/>
+    <rect x="524" y="165" width="54" height="16" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="551" y="176" class="tick" text-anchor="middle">Cumulative</text>
+    <text x="602" y="176" class="tick" text-anchor="middle">History</text>
 
-    <g fill="#FFFFFF" fill-opacity="0.14">
-      <rect x="32"  y="212" width="52" height="8" rx="3"/><rect x="92" y="212" width="40" height="8" rx="3"/>
-      <rect x="146" y="212" width="28" height="8" rx="3"/><rect x="190" y="212" width="22" height="8" rx="3"/>
-      <rect x="230" y="212" width="44" height="8" rx="3"/>
-      <rect x="32"  y="230" width="52" height="8" rx="3"/><rect x="92" y="230" width="34" height="8" rx="3"/>
-      <rect x="146" y="230" width="28" height="8" rx="3"/><rect x="190" y="230" width="22" height="8" rx="3"/>
-      <rect x="230" y="230" width="38" height="8" rx="3"/>
+    <g stroke="#F0EEE9">
+      <path d="M196 210h430M196 244h430M196 278h430"/>
     </g>
-    <rect x="404" y="212" width="44" height="8" rx="3" fill="#77D4CE"/>
-    <rect x="414" y="230" width="34" height="8" rx="3" fill="#FFCCB0"/>
+    <line x1="196" y1="306" x2="626" y2="306" stroke="#E7E5E0"/>
+
+    <!-- trade count bars -->
+    <g fill="#E8C570">
+      <rect x="200" y="272" width="14" height="34"/><rect x="228" y="288" width="14" height="18"/>
+      <rect x="256" y="284" width="14" height="22"/><rect x="284" y="266" width="14" height="40"/>
+      <rect x="312" y="292" width="14" height="14"/><rect x="340" y="278" width="14" height="28"/>
+      <rect x="368" y="254" width="14" height="52"/><rect x="396" y="286" width="14" height="20"/>
+      <rect x="424" y="270" width="14" height="36"/><rect x="452" y="290" width="14" height="16"/>
+      <rect x="480" y="276" width="14" height="30"/><rect x="508" y="262" width="14" height="44"/>
+      <rect x="536" y="284" width="14" height="22"/><rect x="564" y="248" width="14" height="58"/>
+      <rect x="592" y="268" width="14" height="38"/>
+    </g>
+
+    <!-- cumulative line -->
+    <path d="M207 288 L235 280 L263 284 L291 258 L319 262 L347 240 L375 208 L403 214
+             L431 196 L459 202 L487 188 L515 196 L543 200 L571 184 L599 190 L607 190 L607 306 L207 306 Z"
+          fill="url(#ejFill)"/>
+    <polyline points="207,288 235,280 263,284 291,258 319,262 347,240 375,208 403,214 431,196 459,202 487,188 515,196 543,200 571,184 599,190"
+              fill="none" stroke="#D9A21B" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="599" cy="190" r="3" fill="#D9A21B"/>
+
+    <g class="tick">
+      <text x="207" y="318" text-anchor="middle">Apr 10</text>
+      <text x="319" y="318" text-anchor="middle">Apr 24</text>
+      <text x="431" y="318" text-anchor="middle">May 08</text>
+      <text x="543" y="318" text-anchor="middle">Jun 02</text>
+    </g>
+    <g class="tick" text-anchor="end">
+      <text x="192" y="212">$9k</text><text x="192" y="246">$6k</text><text x="192" y="280">$3k</text>
+    </g>
+  </g>
+
+  <!-- ============ direction split ============ -->
+  <g class="s">
+    <rect x="652" y="158" width="288" height="176" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="666" y="176" class="cap">Direction Split</text>
+
+    <g transform="translate(796,248)">
+      <circle r="44" fill="none" stroke="#E0A828" stroke-width="17"
+              stroke-dasharray="161.2 115.3" transform="rotate(-90)"/>
+      <circle r="44" fill="none" stroke="#E4695F" stroke-width="17"
+              stroke-dasharray="115.3 161.2" stroke-dashoffset="-161.2" transform="rotate(-90)"/>
+    </g>
+    <text x="736" y="200" class="tick" fill="#6B7280">41.7%</text>
+    <text x="852" y="298" class="tick" fill="#6B7280">58.3%</text>
+
+    <circle cx="726" cy="318" r="4" fill="#E0A828"/>
+    <text x="736" y="321" class="tick">Long</text>
+    <circle cx="790" cy="318" r="4" fill="#E4695F"/>
+    <text x="800" y="321" class="tick">Short</text>
+  </g>
+
+  <!-- ============ three analysis panels ============ -->
+  <g class="s">
+    <!-- P&L analysis -->
+    <rect x="170" y="346" width="250" height="170" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="184" y="366" class="cap">P&amp;L ANALYSIS</text>
+    <g class="lbl">
+      <text x="184" y="390">Avg W/L</text><text x="184" y="412">Avg Win</text>
+      <text x="184" y="434">Avg Loss</text><text x="184" y="456">Best Trade</text>
+      <text x="184" y="478">Worst Trade</text><text x="184" y="500">Max Drawdown</text>
+    </g>
+    <g font-size="8.5" font-weight="600" text-anchor="end">
+      <text x="406" y="390" fill="#111827">2.31</text>
+      <text x="406" y="412" class="up">$684.20</text>
+      <text x="406" y="434" class="dn">-$296.15</text>
+      <text x="406" y="456" class="up">$2,140.00</text>
+      <text x="406" y="478" class="dn">-$910.25</text>
+      <text x="406" y="500" class="dn">-$3,880.40</text>
+    </g>
+
+    <!-- streaks -->
+    <rect x="430" y="346" width="250" height="170" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="444" y="366" class="cap">STREAKS &amp; WIN DAYS</text>
+    <g class="lbl">
+      <text x="444" y="390">Win Rate (Days)</text><text x="444" y="412">Max Winning Streak</text>
+      <text x="444" y="434">Max Losing Streak</text><text x="444" y="456">Most Profitable Day</text>
+      <text x="444" y="478">Least Profitable Day</text><text x="444" y="500">Consistency</text>
+    </g>
+    <g font-size="8.5" font-weight="600" text-anchor="end">
+      <text x="666" y="390" class="up">62.5%</text>
+      <text x="666" y="412" fill="#111827">6</text>
+      <text x="666" y="434" class="dn">5</text>
+      <text x="666" y="456" class="up">Tuesday</text>
+      <text x="666" y="478" class="dn">Thursday</text>
+      <text x="666" y="500" class="go">34.6%</text>
+    </g>
+
+    <!-- sessions -->
+    <rect x="690" y="346" width="250" height="170" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <text x="704" y="366" class="cap">TIME &amp; SESSIONS</text>
+    <g class="lbl">
+      <text x="704" y="390">Avg Trade Duration</text><text x="704" y="412">Avg Winning Duration</text>
+      <text x="704" y="434">Avg Losing Duration</text><text x="704" y="456">Best Session</text>
+      <text x="704" y="478">Worst Session</text><text x="704" y="500">Sessions Traded</text>
+    </g>
+    <g font-size="8.5" font-weight="600" text-anchor="end" class="go">
+      <text x="926" y="390">12m 40s</text><text x="926" y="412">18m 05s</text>
+      <text x="926" y="434">9m 51s</text><text x="926" y="456">London</text>
+      <text x="926" y="478">Asia</text><text x="926" y="500">4</text>
+    </g>
   </g>
 </svg>
