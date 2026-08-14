@@ -163,6 +163,10 @@
       <form class="contact" id="contactForm" method="POST"
             action="https://formsubmit.co/rex.wongtakwai@gmail.com" novalidate>
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+        <input type="hidden" name="_subject" value="New message from your portfolio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://rexwong428.github.io/portfolio/?sent=1#contact">
         <div class="field">
           <label for="cf-name">Your name</label>
           <input id="cf-name" name="name" type="text" autocomplete="name" required>
@@ -175,7 +179,7 @@
           <label for="cf-message">Message</label>
           <textarea id="cf-message" name="message" rows="5" required></textarea>
         </div>
-        <button class="btn btn--auto" type="submit">Send Email</button>
+        <button class="btn btn--auto" type="submit">Send Message</button>
         <p class="contact__note" id="cf-note" role="status">Your message comes straight to my inbox. I usually reply within a day.</p>
       </form>
     </section>

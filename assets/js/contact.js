@@ -1,23 +1,21 @@
 /* Contact form.
-   GitHub Pages serves static files only, so a form needs somewhere off site to
-   post to. This posts to FormSubmit, which relays the message to Rex's inbox
-   and needs no account: the first submission triggers an activation email that
-   he clicks once, after which messages arrive directly.
+   GitHub Pages serves static files only, so the form posts to FormSubmit, which
+   relays the message to Rex's inbox.
 
-   Submission is AJAX so the visitor stays on the page. If the relay is
-   unreachable, the handler falls back to composing a mailto so the message is
-   never simply lost. */
+   It submits natively rather than over fetch. FormSubmit treats /ajax/<email>
+   as a separate form from <email> and each needs its own activation; the plain
+   endpoint is the activated one. A hidden _next sends the visitor straight back
+   here afterwards, so the round trip is a redirect rather than a mail app.
+
+   This file validates before that submission happens, drops anything that fills
+   the honeypot, and reports the outcome on return. */
 (function () {
   "use strict";
-
-  var TO = "rex.wongtakwai@gmail.com";
-  var ENDPOINT = "https://formsubmit.co/ajax/" + TO;
 
   var form = document.getElementById("contactForm");
   if (!form) return;
 
   var note = document.getElementById("cf-note");
-  var button = form.querySelector("button[type=submit]");
   var idle = note ? note.textContent : "";
   var fields = {
     name: document.getElementById("cf-name"),
@@ -25,18 +23,18 @@
     message: document.getElementById("cf-message")
   };
 
+  /* returning from a successful relay */
+  if (/[?&]sent=1(&|$)/.test(window.location.search)) {
+    if (note) note.textContent = "Thanks, your message is on its way. I will reply as soon as I can.";
+    history.replaceState(null, "", window.location.pathname + "#contact");
+    var target = document.getElementById("contact");
+    if (target) target.scrollIntoView();
+  }
+
   function mark(input, invalid) {
     var wrap = input.closest(".field");
     if (wrap) wrap.classList.toggle("field--invalid", invalid);
     input.setAttribute("aria-invalid", invalid ? "true" : "false");
-  }
-
-  function say(html) { note.innerHTML = html; }
-
-  function mailtoFallback(name, email, message) {
-    return "mailto:" + TO +
-      "?subject=" + encodeURIComponent("Portfolio enquiry from " + name) +
-      "&body=" + encodeURIComponent(message + "\n\n--\n" + name + "\n" + email);
   }
 
   function firstProblem() {
@@ -49,64 +47,31 @@
   }
 
   Object.keys(fields).forEach(function (k) {
-    fields[k].addEventListener("input", function () { mark(fields[k], false); });
+    fields[k].addEventListener("input", function () {
+      mark(fields[k], false);
+      if (note.textContent !== idle && note.textContent.indexOf("on its way") === -1) note.textContent = idle;
+    });
   });
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
     Object.keys(fields).forEach(function (k) { mark(fields[k], false); });
 
     var problem = firstProblem();
     if (problem) {
+      e.preventDefault();
       mark(problem[0], true);
-      say(problem[1]);
+      note.textContent = problem[1];
       problem[0].focus();
       return;
     }
 
-    // bots fill every field they can see; this one is hidden from people
-    if (form.querySelector("[name=_honey]").value) return;
+    /* bots fill every field they can find; this one is hidden from people */
+    var honey = form.querySelector("[name=_honey]");
+    if (honey && honey.value) {
+      e.preventDefault();
+      return;
+    }
 
-    var name = fields.name.value.trim();
-    var email = fields.email.value.trim();
-    var message = fields.message.value.trim();
-
-    button.disabled = true;
-    say("Sending…");
-
-    fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        message: message,
-        _subject: "Portfolio enquiry from " + name,
-        _template: "table",
-        _captcha: "false"
-      })
-    })
-      .then(function (res) { return res.json().catch(function () { return {}; }); })
-      .then(function (data) {
-        if (String(data.success) !== "true") {
-          // the relay explains itself (unactivated form, quota, blocked); keep the
-          // visitor's message generic but do not swallow the actual reason
-          if (data.message) console.warn("Contact relay refused:", data.message);
-          throw new Error(data.message || "relay refused");
-        }
-        form.reset();
-        say("Thanks, your message is on its way. I will reply to " + email + ".");
-      })
-      .catch(function () {
-        say('That did not go through. Please write to <a href="' +
-            mailtoFallback(name, email, message) + '">' + TO + "</a> instead.");
-      })
-      .then(function () {
-        button.disabled = false;
-        setTimeout(function () {
-          if (note.textContent.indexOf("on its way") !== -1) say(idle);
-        }, 12000);
-      });
+    note.textContent = "Sending…";
   });
 })();
