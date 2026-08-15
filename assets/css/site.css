@@ -365,6 +365,8 @@ button.btn{ border:0; cursor:pointer; -webkit-appearance:none; appearance:none; 
   color:var(--ink-faint);
 }
 .meta__row dd{ margin:0; color:var(--ink-soft); }
+.meta__row dd a{ color:var(--mint-bright); text-decoration:underline; text-underline-offset:.15rem; }
+.meta__row dd a:hover{ color:var(--peach); }
 @media (max-width:560px){
   .meta__row{ grid-template-columns:minmax(0,1fr); gap:.1rem; }
 }
